@@ -1,0 +1,48 @@
+## 4. Discussion - Maria Helmetsberger
+
+**a) Accuracy & Convergence:**
+- Which model achieves higher test accuracy?
+
+    The from scratch model achieved a test accuracy of 32.38% and a balanced accuracy of the same. 
+
+    The pretrained model achieved a test accuracy of 95.87 and a balanced accuracy of the same. 
+
+    As far as I know it is the same for normal test and balanced as we have an equal amount of samples for every class. So no need to balance it for that.
+
+    But this shows us that the pretrained model got way better results with more than 60% more accuracy.
+
+- Which model converges faster (reaches good validation accuracy sooner)?
+
+    The pretrained model also learns much faster, it already got an 80% val accuracy by epoch 2 and over 90% by epoch 4. It also stays pretty much simulare in val loss after like epoch 12 (but I cannot tell you for sure where it converges, I don't know its lowest Val Loss for sure). 
+
+    The from scratch does not reach nearly as good results. It reaches over 30 Val Accuracy in Epoch 16 and does not reach over 40% .It oscillates a lot for Val loss, so I cannot say anything for the converging. It would need more training to converge. 
+
+    So the pretrained does converge faster. 
+
+**b) Hardest Classes:**
+- Which classes have the lowest F1-score for each model?
+
+    The from scratch has the lowest F1-score of 0.00 at intersections and tenniscort, followed by 0.06 for the mediumresidential and 0.11 for the river.
+
+    The pretrained one at 0.86 with the river, followed by 0.88 for the intersection, 0.89 for the golfcourse and 0.9 for the sparseresidential. 
+
+- Which classes get confused with each other? (look at the confusion matrix)
+
+    The from scratch things for 5 of 15 samples the medium residential is the chaparral and for four of them that it is the forest. Also it thinks for 7 out of the 15 samples for harbor that it is actually a parking lot. Runway has 4 samples where it thinks are a freeway. There are a lot more examples. It also did not think that there is a single immage of a tenniscourt. There are even more examples of it guessing 4 wrong and more. It really liked the chaparral (where it also got 14 of the 15 samples for it correct) in sum it thought there where 29 of those, it also liked the forrest (14 out of 15 correct for its own class) it guessed 28 samples are forest. 
+
+    The Pretrained one did better, it thought for 2 samples that the denseresidential is actually an intersection, also for 2 that the overpass is an intersection. For 3 samples it thought the golfcourse is actually a river. But it only has one (the golfcourse) where it only guessed 12 out of the 15 samples correctly. Four Have 13 correctly, two 14 correctly and the rest all 15 correct.
+
+- Why? (think about visual similarity, e.g., `dense_residential` vs `medium_residential`)
+
+    Chaparral, forest and medium residentials (at least of the 1 Sample per Class) have like the most vegitation in them. Harbor and Parking lot is quite simple, both have something where no thing is and placed where lots of things are. In the one lots of boats and in the other lots of cars. they are standing quite parallel to each other. A runway and freeway are also really simular, both are streets. So they have the street things. 
+
+    Denseresidential and intersection probably both have lots of houses next to the street with little vegitation arround. Overpass and intersections both have like streets that meet. River and GOlfcoruses probably both have a lot of greenery arround them. 
+
+**c) Pretrained vs Scratch:**
+- Why does transfer learning help (or not) for this dataset?
+
+    because the model already knows some basic things and the general visual features from large datasets. The model from scratch needed to learn everything from only the limited data in little epochs. 
+
+- Are there classes where one model does better than the other?
+    There are no classes where the scratch model outperforms the pretrained model, the pretrained model outperformed it in all categories. 
+

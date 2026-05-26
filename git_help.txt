@@ -1,0 +1,7 @@
+push your stuff first
+git fetch upstream
+git rebase -i upstream/main
+fix conflicts
+git rebase --continue
+->till it tells you u are done
+git push origin main --force
